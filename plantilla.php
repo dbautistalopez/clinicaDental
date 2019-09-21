@@ -118,7 +118,7 @@
             <?php //} ?>
             <?php// if ($_SESSION["rol"]==1 && $_SESSION["id"]==1) { ?>
             <li>
-				<a href="susuario.php">
+				<a href="usuario.php">
 					<i class="fa fa-users" aria-hidden="true"></i> 
 					<span>Usuarios</span>
 				</a>
