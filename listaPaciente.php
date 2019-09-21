@@ -271,7 +271,7 @@ if ($_SESSION["estado"] == "inactivo") {
 									<button type="button" class="btn btn-warning" onclick="actualizar('<?php 1 ?>','<?php 1 ?>','<?php 1 ?>','<?php 1 ?>')"><i class="fa fa-pencil-square-o edit"></i></button>
 
                                     <?php if ($row['estado_paciente'] == 'activo') { ?>
-                                      <button type="button" class="btn btn-danger" onclick="desactivar('<?php echo $row['id_paciente']; ?>')"  title="Desactivar" ><i class="fa fa-times"></i></button>
+                                      <button type="button" class="btn btn-danger" onclick="desactivar('<?php echo $row['id_paciente']; ?>','<?php echo $row['nombre_paciente']; ?>')"  title="Desactivar" ><i class="fa fa-times"></i></button>
                                       <?php }if ($row['estado_paciente'] == 'inactivo') { ?>
                                       <button type="button" class="btn btn-success" onclick="activar('<?php echo $row['id_paciente'] ?>','<?php echo $row['nombre_paciente'] ?>')"  title="Activar" ><i class="fa fa-check"></i></button>
                                       <?php }  ?></td></tr>
