@@ -4,11 +4,11 @@ $db =  new DbConnection;
 $conexion=$db->conectar();
 
 $nombre=$_POST["paciente"];
-$telCont=$_POST["telCont"];
 $fechaCita=$_POST["fechaCita"];
+$horaCita=$_POST["horaCita"];
 $descripcion=$_POST["descripcion"];
 
-    $sql="Insert Into tbl_cita values(NULL,'$nombre','$telCont','$fechaCita','$descripcion','activo')";
+    $sql="Insert Into tbl_cita values(NULL,'$nombre','$fechaCita','$horaCita','$descripcion','activo')";
 
     $result= $conexion->query($sql);
     if($result){

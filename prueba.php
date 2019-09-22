@@ -1,26 +1,25 @@
-﻿<?php
-session_start();
-
-  if ($_SESSION["rol"] != 1) {
-    header("Location: ./");
-  }
-
+<?php
+ session_start();
+if ($_SESSION["estado"] == "inactivo") {
+  session_destroy();
+  header("Location: login.php");
+}
   require_once("lib/db.php");
   $db =  new DbConnection;
   $conexion=$db->conectar();
+    
   if(!isset($_SESSION["usuario"])){
-        header("Location: login.php");
-        exit();
-    }
+      header("Location: login.php");
+      exit();
+  }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Sistema Web | TCD</title>
+<title>Sistema Web | TCD</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="icon" type="image/png" href="img/icono.png" />
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -28,16 +27,18 @@ session_start();
   <link rel="stylesheet" href="css/AdminLTE.min.css">
   <link rel="stylesheet" href="css/_all-skins.min.css">
   <link rel="stylesheet" href="css/jquery.dataTables.min.css">
-  <link rel="stylesheet" href="DataTables/DataTables-1.10.18/dataTables.bootstrap.min.js">
-  <script src="js/jquery.dataTables.min.js"></script>
   <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/app.min.js"></script>
+
       <!-- Alertify CSS -->
   <link rel="stylesheet" href="css/alertify.min.css">  
   <!-- Alertify theme default -->  
   <link rel="stylesheet" href="css/themes/default.min.css"/> 
   <script src="js/alertify.js"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="js/bootstrap.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="js/app.min.js"></script>
+
 <script type="text/javascript" src="DataTables/datatables.min.js"></script>
 <!--Script para cargar datos en modal-->
 <script type="text/javascript">
@@ -63,7 +64,7 @@ session_start();
 
     $('#m2id').val(id);
     document.getElementById('m2nombre').innerHTML = nombre;
-    $('#desactivar').modal('show');
+    $('#eliminar').modal('show');
   }
 </script>
 <script>
@@ -88,12 +89,15 @@ session_start();
 </script>
 </head>
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini" style="background: #000000; overflow-x: auto; position: absolute;">
 <?php require_once 'plantilla.php';
  ?>
+
+
+
  <!--Contenido-->
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper" style="margin-top:50px;">
+<div class="content-wrapper " style="margin-top:50px;width:81.9vw;height:100vh">
 
   <!-- Main content -->
   <section class="content">
@@ -108,8 +112,8 @@ session_start();
             <br>
 
             <br>
-              <div class="row" style="margin-left:25px;margin-right:25px;">
-                <div class="col-md-12" >
+              <div class="row">
+                <div class="col-md-12">
                 <!-- Mostrar alerta-->
                 <div class="text-center text-danger">
                 <?php
@@ -126,7 +130,7 @@ session_start();
                 ?>
               </div>
               <!-- Fin mostrar alerta-->
-			  	<div id="modalEdit">
+                  <div id="modalEdit">
                     <!-- Edit Modal-->
                     <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
@@ -163,40 +167,14 @@ session_start();
                             </div>
                         </div>
                     </div>
-				<!-- /.modal -->
-                </div>
-
-                  <div id="modalActivo">
-                    <!-- Edit Modal-->
-                    <div class="modal fade" id="activar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header bg-primary">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h3 class="modal-title" id="myModalLabel">Activar paciente</h3>
-                                </div>
-                                    <div class="modal-body">
-                                      <div id="users-form ">
-                                          <form method="post" action="Controller/pacientes/activar_paciente.php">
-                                              <center><h1>¿Activar <label id="m3nombre"></label> ?</h1></center>
-                                              <br><br><br>
-                                    <div class="modal-footer">
-                                      <input type="hidden" name="id_paciente" id="m3id">
-                                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                      <button type="submit" class="btn btn-success">Activar</button>
-                                    </div>
-                                  </form>
-                              </div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
 <!-- /.modal -->
-                </div>
+                  </div>
 
-                  <div id="modalDesactivo">
+                
+
+                  <div id="modalDesactivar">
                     <!-- Edit Modal-->
-                    <div class="modal fade" id="desactivar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="eliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header bg-primary">
@@ -205,7 +183,7 @@ session_start();
                                 </div>
                                     <div class="modal-body">
                                       <div id="users-form ">
-                                          <form method="post" action="Controller/pacientes/desactivar_paciente.php">
+                                          <form method="post" action="procces/paciente/desactivar_paciente.php">
                                               <center><h1>¿Desactivar <label id="m2nombre"></label> ?</h1></center>
                                               <br><br><br>
                                     <div class="modal-footer">
@@ -221,8 +199,6 @@ session_start();
                     </div>
 <!-- /.modal -->
                   </div>
-
-
                         <!--Contenido-->
                         <table class="display table-bordered table-hover table-striped" id="mytable">
 
@@ -233,24 +209,26 @@ session_start();
                                     <th>Dirección</th>
                                     <th>Teléfono</th>
                                     <th>Fecha Examen</th>
+                                    <th>Edad</th>
                                     <th>Estado</th>
                                     <th>Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
-                                  $i = 0;
-								  $sql="SELECT *From tbl_paciente order by id_paciente desc";
-								  $result=mysqli_query($conexion,$sql);
-								  while($row=mysqli_fetch_array($result)){
-									$i++;
+                                    $i = 0;
+                                    $sql="SELECT nombre_paciente,direccion_paciente,telmovil_paciente,fecha_examen,edad_paciente,estado_paciente From tbl_paciente order by id_paciente desc";
+                                    $result=mysqli_query($conexion,$sql);
+                                    while($row=mysqli_fetch_array($result)){
+                                      $i++;
                                 ?>
                               <tr>
-							  <td><?php echo $i; ?></td>
+                                    <td><?php echo $i; ?></td>
                                     <td><?php echo $row['nombre_paciente'] ?></td>
                                     <td><?php echo $row['direccion_paciente'] ?></td>
                                     <td><?php echo $row['telmovil_paciente'] ?></td>
                                     <td class="text-center"><?php echo $row['fecha_examen'] ?></td>
+                                    <td class="text-center"><?php echo $row['edad_paciente'] ?></td>
                                     <td class="text-center"><?php 
                                       if ($row['estado_paciente'] == 'activo') {
                                         echo "Activo";
@@ -260,24 +238,19 @@ session_start();
                                       }
                                      ?></td>
                                     <td>
+										<!-- <button type="button" class="btn btn-warning" onclick="actualizar('<?php echo $row['id_paciente'] ?>','<?php echo $row['nombre_paciente'] ?>','<?php echo $row['direccion_paciente']?>','<?php echo $row['telmovil_paciente'] ?>')"  title="Editar" >
+										<i class="fa fa-pencil-square-o edit"></i>
+									</button> -->
 
-                                        <center>
-										<button type="button" class="btn btn-warning " onclick="actualizar('<?php echo $row['id_paciente'] ?>','<?php echo $row['nombre_paciente'] ?>','<?php echo $row['direccion_paciente'] ?>','<?php echo $row['telmovil_paciente'] ?>')"  title="Editar" ><span class="fa fa-pencil-square-o edit"></span></button>
+									<button type="button" class="btn btn-warning" onclick="actualizar('<?php 1 ?>','<?php 1 ?>','<?php 1 ?>','<?php 1 ?>')"><i class="fa fa-pencil-square-o edit"></i></button>
 
-										<?php if ($row['estado_paciente'] == 'activo') { ?>
-										<button type="button" class="btn btn-danger" onclick="desactivar('<?php echo $row['id_paciente']; ?>','<?php echo $row['nombre_paciente']; ?>')"  title="Desactivar" ><i class="fa fa-times"></i></button>
-
-										<?php }if ($row['estado_paciente'] == 'inactivo') { ?>
-
-										<button type="button" class="btn btn-success" onclick="activar('<?php echo $row['id_paciente'] ?>','<?php echo $row['nombre_paciente'] ?>')"  title="Activar" ><i class="fa fa-check"></i></button>
-
-										<?php }  ?>
-										</center>      
-                                        
-                                    </td>
-                              </tr>
-								<?php 
-								  }
+                                    <?php if ($row['estado_paciente'] == 'activo') { ?>
+                                      <button type="button" class="btn btn-danger" onclick="desactivar('<?php echo $row['id_paciente']; ?>')"  title="Desactivar" ><i class="fa fa-times"></i></button>
+                                      <?php }if ($row['estado_paciente'] == 'inactivo') { ?>
+                                      <button type="button" class="btn btn-success" onclick="activar('<?php echo $row['id_paciente'] ?>','<?php echo $row['nombre_paciente'] ?>')"  title="Activar" ><i class="fa fa-check"></i></button>
+                                      <?php }  ?></td></tr>
+                                <?php
+                                    }
                                     $conexion->close();
                                 ?>
 
@@ -296,7 +269,6 @@ session_start();
     </div><!-- /.col -->
 
   </section><!-- /.content -->
-<!--Fin-Contenido-->
-
+<!--Fin-Contenido-->  <!-- jQuery 2.1.4 -->
 </body>
 </html>

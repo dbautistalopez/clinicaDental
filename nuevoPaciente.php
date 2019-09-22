@@ -142,7 +142,7 @@ $(document).ready(function(){
               <!-- Fin mostrar alerta-->
                     <div id="respuesta"></div>
                         <!--Contenido-->
-                        <div id="users-form"  style="margin-top:20px; padding:25px; background-color:#FFFFFF; border-radius:5px;margin-left:auto; margin-right:auto;">
+                        <div id="users-form"  style="padding:25px; background-color:#FFFFFF; border-radius:5px;margin-left:auto; margin-right:auto;">
                             <form method="post" action="Controller/pacientes/procesar_paciente.php">
                                 <div class="form-group col-md-12">
                                      <label for="usuario">Nombre del Paciente</label>
@@ -152,11 +152,11 @@ $(document).ready(function(){
                                      <label for="direccion">Dirección</label>
                                         <input class="form-control" type="text" id="direccion" name="direccion" placeholder="Ingrese su dirección" required>
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
                                   <label for="tel1">Teléfono de Casa</label>
                                     <input class="form-control" type="tel" placeholder="77112233" id="tel1" name="telcasa">
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
                                   <label for="tel2">Teléfono Celular</label>
                                     <input class="form-control" type="tel" placeholder="55443322" id="tel2" name="telmovil">
                                 </div>
@@ -165,18 +165,14 @@ $(document).ready(function(){
                                     <input class="form-control" type="date" value="2019-01-10" id="fecha" name="fechaexamen">
                                 </div>
                                 <div class="form-group col-md-4">
-                                  <label for="edad" class="col-2 col-form-label">Edad</label>
-                                    <input class="form-control" type="number" placeholder="40" id="edad" name="edad">
-                                </div>
-                                <div class="form-group col-md-4">
                                   <label for="fechaNac" class="col-2 col-form-label">Fecha de Nacimiento</label>
                                     <input class="form-control" type="date" value="1999-02-20" id="fechaNac" name="fechaNac">
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
                                      <label for="estadoCivil">Estado Civil</label>
                                         <input class="form-control" type="text" id="estadoCivil" name="estadoCivil" placeholder="Ingrese estado civil" required>
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
                                      <label for="ocupacion">Ocupación</label>
                                         <input class="form-control" type="text" id="ocupacion" name="ocupacion" placeholder="Ingrese ocupación" required>
                                 </div>

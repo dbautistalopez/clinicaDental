@@ -141,14 +141,14 @@ $(document).ready(function(){
               <!-- Fin mostrar alerta-->
                     <div id="respuesta"></div>
                         <!--Contenido-->
-                        <div id="users-form"  style="margin-top:20px; padding:25px; background-color:#FFFFFF; border-radius:5px;margin-left:auto; margin-right:auto;">
+                        <div id="users-form"  style="padding:25px; background-color:#FFFFFF; border-radius:5px;margin-left:auto; margin-right:auto;">
                             <form method="post" action="Controller/citas/procesar_cita.php">
                             <div class="form-group col-md-12">
                                     <label for="paciente">Paciente</label>
                                         <select name="paciente" id="paciente" class="form-control" required>
                                         <?php
                                             // Conexion a la DB para mostar pacientes
-                                            $sql="Select * From tbl_paciente";
+                                            $sql="Select * From tbl_paciente where estado_paciente = 'activo'";
                                             $result=mysqli_query($conexion,$sql);
                                             while($row=mysqli_fetch_array($result)){
                                                 echo "<option value='".$row['id_paciente']."'>";
@@ -160,12 +160,13 @@ $(document).ready(function(){
                                         <br>
                                 </div>
                                 <div class="form-group col-md-6">
-                                  <label for="telCont">Teléfono de Contacto</label>
-                                    <input class="form-control" type="tel" placeholder="77112233" id="telCont">
+                                  <label for="fechaCita" class="col-2 col-form-label">Fecha de la Cita</label>
+                                  <?php $fcha = date("Y-m-d");?>
+                                    <input class="form-control" type="date" value="<?php echo $fcha;?>" id="fechaCita" name="fechaCita">
                                 </div>
                                 <div class="form-group col-md-6">
-                                  <label for="fechaCita" class="col-2 col-form-label">Fecha de la Cita</label>
-                                    <input class="form-control" type="date" value="2019-01-10" id="fechaCita" name="fechaCita">
+                                  <label for="horaCita">Hora de la Cita</label>
+                                    <input class="form-control" type="time" value="11:45:00" step="1" id="horaCita" name="horaCita">
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label for="descripcion">Descipción</label>
