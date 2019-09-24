@@ -13,6 +13,7 @@
   //       header("Location: login.php");
   //       exit();
   //   }
+//Verificacion de Sesion
 ?>
 <?php
  session_start();

@@ -14,7 +14,7 @@
 //       exit();
 //   }
 ?>
-
+<!-- Verificacion de Sesion -->
 <?php
  session_start();
 if ($_SESSION["estado"] == "inactivo") {
@@ -142,6 +142,7 @@ $(document).ready(function(){
               <!-- Fin mostrar alerta-->
                     <div id="respuesta"></div>
                         <!--Contenido-->
+                        <!-- Form para crear nuevo Usuario con los datos Proporcionados por el cliente -->
                         <div id="users-form"  style="padding:25px; background-color:#FFFFFF; border-radius:5px;margin-left:auto; margin-right:auto;">
                             <form method="post" action="Controller/pacientes/procesar_paciente.php">
                                 <div class="form-group col-md-12">
@@ -200,10 +201,11 @@ $(document).ready(function(){
                                     <label for="usuario">Seleccione Estado o tratamiento</label>
                                         <select name="categoria" id="categoria" class="form-control" required>
                                         <?php
-
+                                            //Conexion a la base de datos con mysqli
                                             $sql="Select * From tbl_categoria";
                                             $result=mysqli_query($conexion,$sql);
                                             while($row=mysqli_fetch_array($result)){
+                                                // Imprime informacion desde la base de datos
                                                 echo "<option value='".$row['id_categoria']."'>";
                                                 echo $row['nombre_categoria'];
                                                 echo "</option>";

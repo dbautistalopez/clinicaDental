@@ -1,3 +1,4 @@
+<!-- Verificacion de Sesion -->
 <?php
  session_start();
 if ($_SESSION["estado"] == "inactivo") {
@@ -60,6 +61,7 @@ if ($_SESSION["estado"] == "inactivo") {
       <div class="col-md-12">
         <div class="box">
           <div class="box-header with-border">
+          <!--Bienvenida al Sistema -->
             <label style="font-size:30px;">Inicio</label>
           </div>
           <!-- /.box-header -->
