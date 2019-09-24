@@ -18,7 +18,7 @@ session_start();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+<meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Sistema Web | TCD</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -137,18 +137,18 @@ session_start();
                                 </div>
                                     <div class="modal-body">
                                       <div id="users-form ">
-                                          <form method="post" action="">
+                                          <form method="post" action="Controller/pacientes/modificar_paciente.php">
                                           <div class="form-group col-md-8">
                                               <label for="usuario">Nombre de Paciente</label>
                                                   <input class="form-control" type="text" id="mnombre" name="nombre" placeholder="Ingrese nombre del paciente" required>
                                           </div>
                                           <div class="form-group col-md-8">
                                               <label for="usuario">Dirección</label>
-                                                  <input class="form-control" type="text" id="mdescripcion" name="descripcion" placeholder="Ingrese direccion" required>
+                                                  <input class="form-control" type="text" id="mdescripcion" name="direccion" placeholder="Ingrese direccion" required>
                                           </div>
                                           <div class="form-group col-md-5">
                                               <label for="usuario">Teléfono móvil</label>
-                                                  <input class="form-control" type="number" id="mminima" name="minima" placeholder="Ingrese telefono" min="8">
+                                                  <input class="form-control" type="number" id="mminima" name="tel" placeholder="Ingrese telefono" min="8">
                                           </div>
                                               <br><br><br><br><br><br><br><br><br><br>
                                                 <br><br>
@@ -247,7 +247,7 @@ session_start();
                                 ?>
                               <tr>
 							  <td><?php echo $i; ?></td>
-                                    <td><?php echo $row['nombre_paciente'] ?></td>
+                                    <td class="font-weight-bold"><?php echo $row['nombre_paciente'] ?></td>
                                     <td><?php echo $row['direccion_paciente'] ?></td>
                                     <td><?php echo $row['telmovil_paciente'] ?></td>
                                     <td class="text-center"><?php echo $row['fecha_examen'] ?></td>

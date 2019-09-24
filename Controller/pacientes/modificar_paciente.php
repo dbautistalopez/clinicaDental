@@ -4,26 +4,18 @@ require_once("../../lib/db.php");
 $db =  new DbConnection;
 $conexion=$db->conectar();
 
-$id=$_POST["id_usuario"];
+$id=$_POST["id_paciente"];
 $nombre=$_POST["nombre"];
-$usuario=$_POST["usuario"];
-$pass=$_POST["passvieja"];
-//$rol=$_POST["rol"];
+$direccion=$_POST["direccion"];
+$tel=$_POST["tel"];
 
-//si las contraseña actual y la entrada del usuario conciden
-if (hash('sha256', $pass) == $_SESSION["password"]) {
-
-	$sql="UPDATE tbl_usuario SET nombre_usuario='$nombre', username='$usuario' WHERE id_usuario='$id'";
-		    
-	$result= $conexion->query($sql);
-	if($result){
-		header('Location: ../../perfil.php?success=1');
-	}else{
-		header('Location: ../../perfil.php?error=1');
-	}
-
+$sql="UPDATE tbl_paciente SET nombre_paciente='$nombre', direccion_paciente='$direccion', telmovil_paciente='$tel' WHERE id_paciente='$id'";
+		
+$result= $conexion->query($sql);
+if($result){
+	header('Location: ../../listaPaciente.php?success=1');
 }else{
-	header('Location: ../../perfil.php?nocoin2=1');
+	header('Location: ../../listaPaciente.php?error=1');
 }
 
 $conexion->close();
