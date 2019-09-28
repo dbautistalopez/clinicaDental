@@ -21,7 +21,7 @@ $medPer=$_POST["medPer"];
 $telMed=$_POST["telMed"];
 
 
-    $sql="Insert Into tbl_paciente values(NULL,'$nombre','$direccion','$telCasa','$telMovil','$fechaEx','$edad','$fechaNac','$estadoCivil','$ocupacion','$recomendado','$perResp','$dirPerResp','$medPer','$telMed','activo')";
+    $sql="Insert Into tbl_paciente values(NULL,'$nombre','$direccion','$telCasa','$telMovil','$fechaEx','$fechaNac','$estadoCivil','$ocupacion','$recomendado','$perResp','$dirPerResp','$medPer','$telMed','activo')";
 
     $result= $conexion->query($sql);
     if($result){
