@@ -94,7 +94,7 @@
                  <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="caja.php"><i class="fa fa-circle-o"></i>Crear tratamiento</a></li>
+                <li><a href="nuevoPresupuesto.php"><i class="fa fa-circle-o"></i>Crear tratamiento</a></li>
                 <li><a href="venta.php"><i class="fa fa-circle-o"></i>Administrar tratamientos</a></li>
               </ul>
             </li>
