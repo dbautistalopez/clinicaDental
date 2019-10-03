@@ -2,9 +2,9 @@
 require_once("../../lib/db.php");
 $db =  new DbConnection;
 $conexion=$db->conectar();
-$id=$_POST["id_paciente"];
+$id=$_POST["id_Pacientes"];
 
-    $sql = "UPDATE tbl_paciente SET estado_paciente = 'activo' WHERE id_paciente='$id'";
+    $sql = "UPDATE tbl_pacientes SET estadoPaciente = 'activo' WHERE id_Pacientes='$id'";
     
     $result= $conexion->query($sql);
 	if($result){
