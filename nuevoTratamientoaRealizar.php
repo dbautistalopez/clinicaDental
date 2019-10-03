@@ -1,6 +1,4 @@
-<?php
 
-?>
 <!-- Verificacion de Sesion -->
 <?php
  session_start();
@@ -101,7 +99,7 @@ if ($_SESSION["estado"] == "inactivo") {
                                      <select class="form-control" id="tratreco" name="tratreco" placeholder="Selecciona tratamiento recomendado" required>
                                      
                                     <?php
-                                    
+                                    //davidsin lo mirara 
                                         while($mostrar=mysqli_fetch_array($result)){
                                         echo "<option value= '".$mostrar['0']."'>".$mostrar['0']."</option>";  //De esta forma el numero 0 representa la posicion que realizo el select y muestra todos los productos
                                         }
