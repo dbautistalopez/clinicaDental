@@ -1,4 +1,12 @@
 # clinicaDental
+
+## Credenciales de Prueba
+
+    -User
+    equito
+    -Password
+    765
+
 Sistema Web "Tu Clínica Dental"
 
 Control de pacientes, citas y pagos
