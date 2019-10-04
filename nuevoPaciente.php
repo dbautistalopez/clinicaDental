@@ -145,13 +145,21 @@ $(document).ready(function(){
                         <!-- Form para crear nuevo Usuario con los datos Proporcionados por el cliente -->
                         <div id="users-form"  style="padding:25px; background-color:#FFFFFF; border-radius:5px;margin-left:auto; margin-right:auto;">
                             <form method="post" action="Controller/pacientes/procesar_paciente.php">
+                                <div class="form-group col-md-4">
+                                     <label for="foto">Foto del Paciente</label>
+                                        <input type="file" src="img_submit.gif">
+                                 </div>       
                                 <div class="form-group col-md-12">
                                      <label for="usuario">Nombre del Paciente</label>
                                         <input class="form-control" type="text" id="nombre" name="nombre" placeholder="Ingrese nombre del producto" required>
                                 </div>
-                                <div class="form-group col-md-12">
+                                <div class="form-group col-md-8">
                                      <label for="direccion">Dirección</label>
                                         <input class="form-control" type="text" id="direccion" name="direccion" placeholder="Ingrese su dirección" required>
+                                </div>
+                                <div class="form-group col-md-4">
+                                     <label for="dpi">DPI</label>
+                                        <input class="form-control" type="text" id="dpi" name="dpi" placeholder="Ingrese su DPI" required>
                                 </div>
                                 <div class="form-group col-md-4">
                                   <label for="tel1">Teléfono de Casa</label>
