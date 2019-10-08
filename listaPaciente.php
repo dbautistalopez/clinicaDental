@@ -241,7 +241,7 @@ session_start();
                             <tbody>
                                 <?php
                                   $i = 0;
-								  $sql="SELECT *From tbl_paciente order by id_paciente desc";
+								  $sql="SELECT *From tbl_pacientes order by id_pacientes desc";
 								  $result=mysqli_query($conexion,$sql);
 								  while($row=mysqli_fetch_array($result)){
 									$i++;

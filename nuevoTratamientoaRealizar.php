@@ -88,8 +88,8 @@ if ($_SESSION["estado"] == "inactivo") {
                             <form method="post" action="Controller/tratamientos/agregar_tratamientos.php">
                                 
                                     <?php
-                                            //Para mostrar todas las piezas disponibles
-                                        $sql="SELECT * FROM tbl_Presupuestos";
+                                            //Aqui tendriamos que recibir el Id del Paciente seleccionado para que solo se desplieguen los tratamientos pendientes de él
+                                        $sql="SELECT * FROM tbl_Presupuestos WHERE id_Pacientes = 3";
                                         $result=mysqli_query($conexion,$sql);
 
                                         ?>
@@ -101,7 +101,7 @@ if ($_SESSION["estado"] == "inactivo") {
                                     <?php
                                     //davidsin lo mirara 
                                         while($mostrar=mysqli_fetch_array($result)){
-                                        echo "<option value= '".$mostrar['0']."'>".$mostrar['0']."</option>";  //De esta forma el numero 0 representa la posicion que realizo el select y muestra todos los productos
+                                        echo "<option value= '".$mostrar['0']."'>".$mostrar['3']."</option>";  //De esta forma el numero 0 representa la posicion que realizo el select y muestra todos los productos
                                         }
 
                                         

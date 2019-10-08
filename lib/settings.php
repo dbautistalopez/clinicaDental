@@ -2,5 +2,5 @@
 define("SERVER","localhost");
 define("USER","root");
 define("PASSWORD","");
-define("DBNAME","clinicadental3");
+define("DBNAME","clinicadental2");
 ?>
