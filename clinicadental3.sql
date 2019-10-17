@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-10-2019 a las 03:24:27
+-- Tiempo de generación: 18-10-2019 a las 00:57:31
 -- Versión del servidor: 10.1.35-MariaDB
 -- Versión de PHP: 7.2.9
 
@@ -19,8 +19,28 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `clinicadental2`
+-- Base de datos: `clinicadental3`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tbl_cclinico`
+--
+
+CREATE TABLE `tbl_cclinico` (
+  `id_cclinico` int(11) NOT NULL,
+  `nombre_cc` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `descripcion_cc` varchar(75) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_cclinico`
+--
+
+INSERT INTO `tbl_cclinico` (`id_cclinico`, `nombre_cc`, `descripcion_cc`) VALUES
+(1, 'Â¿Es esta su primera visita?', 'Verificar si es la primera vez que llega a la clÃ­nica'),
+(2, 'Le dieron instrucciones de higiene oral', 'asd');
 
 -- --------------------------------------------------------
 
@@ -74,7 +94,8 @@ CREATE TABLE `tbl_pacientes` (
 --
 
 INSERT INTO `tbl_pacientes` (`id_Pacientes`, `nombre_Pacientes`, `direccion_Pacientes`, `telefonoCasa`, `telefonoCel`, `fechaRegistro`, `fechaNacimiento`, `estadoCivil`, `ocupacion`, `recomendadoPor`, `personaResponsable`, `numeroRecomendaciones`, `direccionResponsable`, `medicoPersonal`, `telefonoMedico`, `fotografias`, `estadoPaciente`) VALUES
-(1, 'Esteban Quito', 'Xela', '77777777', '22222222', '2019-10-01', '2019-08-06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo');
+(1, 'Esteban Quito', 'Xela', '77777777', '22222222', '2019-10-01', '2019-08-06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo'),
+(2, '', '', '', '', '0000-00-00', '0000-00-00', '', '', '', '', NULL, '', '', '', NULL, 'activo');
 
 -- --------------------------------------------------------
 
@@ -186,6 +207,12 @@ INSERT INTO `tratamientorealizar` (`id_Seguimientos`, `id_Citas`, `id_Presupuest
 --
 
 --
+-- Indices de la tabla `tbl_cclinico`
+--
+ALTER TABLE `tbl_cclinico`
+  ADD PRIMARY KEY (`id_cclinico`);
+
+--
 -- Indices de la tabla `tbl_citas`
 --
 ALTER TABLE `tbl_citas`
@@ -237,6 +264,12 @@ ALTER TABLE `tratamientorealizar`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `tbl_cclinico`
+--
+ALTER TABLE `tbl_cclinico`
+  MODIFY `id_cclinico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `tbl_citas`
 --
 ALTER TABLE `tbl_citas`
@@ -246,7 +279,7 @@ ALTER TABLE `tbl_citas`
 -- AUTO_INCREMENT de la tabla `tbl_pacientes`
 --
 ALTER TABLE `tbl_pacientes`
-  MODIFY `id_Pacientes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_Pacientes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_piezas`

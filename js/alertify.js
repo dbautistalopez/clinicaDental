@@ -5,7 +5,7 @@
  * Licensed under GPL 3 <https://opensource.org/licenses/gpl-3.0>*/
 ( function ( window ) {
     'use strict';
-    
+     
     /**
      * Keys enum
      * @type {Object}

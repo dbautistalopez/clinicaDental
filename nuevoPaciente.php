@@ -44,8 +44,7 @@ if ($_SESSION["estado"] == "inactivo") {
   <link rel="stylesheet" href="css/font-awesome.css">
   <link rel="stylesheet" href="css/AdminLTE.min.css">
   <link rel="stylesheet" href="css/_all-skins.min.css">
-  <!--<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-  <link rel="shortcut icon" href="img/favicon.ico">-->
+  <link rel="stylesheet" href="css/personal.css">
   <script src="js/jQuery-2.1.4.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/app.min.js"></script>
@@ -54,51 +53,17 @@ if ($_SESSION["estado"] == "inactivo") {
   <!-- Alertify theme default -->  
   <link rel="stylesheet" href="css/themes/default.min.css"/> 
   <script src="js/alertify.js"></script>
-  
-  <!-- <script>
-  $(document).ready(function(){
-    $('#enviamarca').click(function(){
-      var marca = document.getElementById('marca').value;
-      var ruta = "Nom="+marca;
-      $.ajax({
-        url: 'procces/procesar_marca.php',
-        type: 'POST',
-        data: ruta,
-      })
-      .done(function(res){
-        $('#respuesta').html(res)
-      })
-      .fail(function(){
-        console.log("error");
-      })
-      .always(function(){
-        console.log("complete");
-      });
-    });
-});
-</script>
-<script>
-$(document).ready(function(){
-  $('#enviamedida').click(function(){
-    var medida = document.getElementById('medida').value;
-    var ruta = "Nom="+medida;
-    $.ajax({
-      url: 'procces/procesar_medida.php',
-      type: 'POST',
-      data: ruta,
-    })
-    .done(function(res){
-      $('#respuesta').html(res)
-    })
-    .fail(function(){
-      console.log("error");
-    })
-    .always(function(){
-      console.log("complete");
-    });
-  });
-});
-</script> -->
+  <script>
+	  jQuery(document).ready(function($){
+		$("#regNuevo").click(function(){
+			$('#users-form').css("display","none");
+			$('#titulo').css("display","none");
+			$('#users-cc').css("display","block");
+			$('#titulo1').css("display","block");
+		});
+		
+	  });
+  </script>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -118,7 +83,8 @@ $(document).ready(function(){
       <div class="col-md-12">
         <div class="box">
           <div class="box-header with-border">
-            <label style="font-size:30px;">Registro de Pacientes</label>
+			<label style="font-size:30px;" id="titulo">Registro de Pacientes</label>
+			<label style="font-size:30px;" id="titulo1">Seleccione las opciones...</label>
           </div>
           <!-- /.box-header -->
           <div class="box-body">
@@ -143,7 +109,7 @@ $(document).ready(function(){
                     <div id="respuesta"></div>
                         <!--Contenido-->
                         <!-- Form para crear nuevo Usuario con los datos Proporcionados por el cliente -->
-                        <div id="users-form"  style="padding:25px; background-color:#FFFFFF; border-radius:5px;margin-left:auto; margin-right:auto;">
+                        <div id="users-form"  style="padding:25px; background-color:#FFFFFF; border-radius:5px;margin-left:auto; margin-right:auto;" >
                             <form method="post" action="Controller/pacientes/procesar_paciente.php">
                                 <div class="form-group col-md-4">
                                      <label for="foto">Foto del Paciente</label>
@@ -226,12 +192,50 @@ $(document).ready(function(){
                                 <div class="form-row">
                                   <div class="form-group col-md-12">
                                     <br>
-                                    <button type="submit" class="btn btn-primary" style="width: 20%;">Registrar Nuevo Paciente</button>
+                                    <button type="submit" id="regNuevo" class="btn btn-primary" style="width: 20%;">Registrar Nuevo Paciente</button>
                                   </div>
                                 </div>
                             </form>
 
-                        </div>
+						</div>
+						
+						<div id="users-cc" class="vh-100 bg-light w-100">
+							<form action="Controller/control-clinico/procesar_cc.php" class="w-100">
+								<table style="width:60%;margin-left:auto;margin-right:auto;">
+									<?php
+										$i = 0;
+										$sql="SELECT *From tbl_cclinico order by id_cclinico desc";
+										$result=mysqli_query($conexion,$sql);
+										while($row=mysqli_fetch_array($result)){
+											$i++;
+									?>
+									<tr style="height:20px;">
+										<td style="width:5px">											
+											<input type="checkbox" id="checc" name="checc">
+										</td>
+										<td style="width:5px">
+											<?php echo $row['nombre_cc'] ?> </td>
+										<td style="width:5px">                                
+											<div class="form-group ml-5">
+											<label for="apuntecc"></label>
+												<input class="form-control" type="text" placeholder="Ingrese apunte" id="apuntecc" name="apuntecc">
+											</div>
+										</td>
+									</tr>
+									<?php 
+										}
+											$conexion->close();
+									?>
+
+								</table>
+								<div class="form-row">
+									<div class="form-group col-md-12">
+										<br>
+										<button type="submit" id="regNuevo" class="btn btn-primary" style="width:20%;margin-left:35%;margin-right:auto;">Guardar Cuadro Clínico</button>
+									</div>
+								</div>
+							</form>
+						</div>
                         <!--Fin Contenido-->
                   </div>
                 </div>

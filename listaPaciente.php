@@ -42,12 +42,12 @@ session_start();
 <script type="text/javascript" src="DataTables/datatables.min.js"></script>
 <!--Script para cargar datos en modal-->
 <script type="text/javascript">
-  function actualizar(id_paciente,nombre_paciente,direccion_paciente,telmovil_paciente){
+  function actualizar(id_Paciente,nombre_Pacientes,direccion_Pacientes,telefonoCel){
     //alert(id_categoria,nombre_categoria,descripcion_categoria);
-     var id = id_paciente;
-     var nombre = nombre_paciente;
-     var direccion = direccion_paciente;
-     var tel = telmovil_paciente;
+     var id = id_Paciente;
+     var nombre = nombre_Pacientes;
+     var direccion = direccion_Pacientes;
+     var tel = telefonoCel;
 
     $('#mid').val(id);
     $('#mnombre').val(nombre);
@@ -58,9 +58,9 @@ session_start();
 </script>
 
 <script>
-  function desactivar(id_paciente,nombre_paciente){
-     var id = id_paciente;
-     var nombre = nombre_paciente;
+  function desactivar(id_Paciente,nombre_Pacientes){
+     var id = id_Paciente;
+     var nombre = nombre_Pacientes;
 
     $('#m2id').val(id);
     document.getElementById('m2nombre').innerHTML = nombre;
@@ -68,9 +68,9 @@ session_start();
   }
 </script>
 <script>
-  function activar(id_paciente,nombre_paciente){
-     var id = id_paciente;
-     var nombre = nombre_paciente;
+  function activar(id_Paciente,nombre_Pacientes){
+     var id = id_Paciente;
+     var nombre = nombre_Pacientes;
 
     $('#m3id').val(id);
     document.getElementById('m3nombre').innerHTML = nombre;
@@ -154,7 +154,7 @@ session_start();
                                               <br><br><br><br><br><br><br><br><br><br>
                                                 <br><br>
                                     <div class="modal-footer">
-                                      <input type="hidden" name="id_paciente" id="mid">
+                                      <input type="hidden" name="id_Paciente" id="mid">
                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                       <button type="submit" class="btn btn-warning">Actualizar</button>
                                     </div>
@@ -182,7 +182,7 @@ session_start();
                                               <center><h1>¿Activar <label id="m3nombre"></label> ?</h1></center>
                                               <br><br><br>
                                     <div class="modal-footer">
-                                      <input type="hidden" name="id_paciente" id="m3id">
+                                      <input type="hidden" name="id_Paciente" id="m3id">
                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                       <button type="submit" class="btn btn-success">Activar</button>
                                     </div>
@@ -210,7 +210,7 @@ session_start();
                                               <center><h1>¿Desactivar <label id="m2nombre"></label> ?</h1></center>
                                               <br><br><br>
                                     <div class="modal-footer">
-                                      <input type="hidden" name="id_paciente" id="m2id">
+                                      <input type="hidden" name="id_Paciente" id="m2id">
                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                       <button type="submit" class="btn btn-danger">Desactivar</button>
                                     </div>
@@ -230,6 +230,7 @@ session_start();
                             <thead style="background: #263238; color:#FFFFFF;">
                                 <tr>
                                     <th>No.</th>
+                                    <th>Foto</th>
                                     <th>Nombre</th>
                                     <th>Dirección</th>
                                     <th>Teléfono</th>
@@ -241,36 +242,37 @@ session_start();
                             <tbody>
                                 <?php
                                   $i = 0;
-								  $sql="SELECT *From tbl_pacientes order by id_pacientes desc";
+								  $sql="SELECT *From tbl_pacientes order by id_Pacientes desc";
 								  $result=mysqli_query($conexion,$sql);
 								  while($row=mysqli_fetch_array($result)){
 									$i++;
                                 ?>
                               <tr>
-							  <td><?php echo $i; ?></td>
-                                    <td class="font-weight-bold"><?php echo $row['nombre_paciente'] ?></td>
-                                    <td><?php echo $row['direccion_paciente'] ?></td>
-                                    <td><?php echo $row['telmovil_paciente'] ?></td>
-                                    <td class="text-center"><?php echo $row['fecha_examen'] ?></td>
-                                    <td class="text-center"><?php 
-                                      if ($row['estado_paciente'] == 'activo') {
-                                        echo "Activo";
-                                      }
-                                      if ($row['estado_paciente'] == 'inactivo') {
-                                        echo "Inactivo";
-                                      }
-                                     ?></td>
-                                    <td>
+                <td><?php echo $i; ?></td>
+                <td></td>
+                <td class="font-weight-bold"><?php echo $row['nombre_Pacientes'] ?></td>
+                <td><?php echo $row['direccion_Pacientes'] ?></td>
+                <td><?php echo $row['telefonoCel'] ?></td>
+                <td class="text-center"><?php echo $row['fechaRegistro'] ?></td>
+                <td class="text-center"><?php 
+                  if ($row['estadoPaciente'] == 'activo') {
+                    echo "Activo";
+                  }
+                  if ($row['estadoPaciente'] == 'inactivo') {
+                    echo "Inactivo";
+                  }
+                  ?></td>
+                <td>
 
                                         <center>
-										<button type="button" class="btn btn-warning " onclick="actualizar('<?php echo $row['id_paciente'] ?>','<?php echo $row['nombre_paciente'] ?>','<?php echo $row['direccion_paciente'] ?>','<?php echo $row['telmovil_paciente'] ?>')"  title="Editar" ><span class="fa fa-pencil-square-o edit"></span></button>
+										<button type="button" class="btn btn-warning " onclick="actualizar('<?php echo $row['id_Pacientes'] ?>','<?php echo $row['nombre_Pacientes'] ?>','<?php echo $row['direccion_Pacientes'] ?>','<?php echo $row['telefonoCel'] ?>')"  title="Editar" ><span class="fa fa-pencil-square-o edit"></span></button>
 
-										<?php if ($row['estado_paciente'] == 'activo') { ?>
-										<button type="button" class="btn btn-danger" onclick="desactivar('<?php echo $row['id_paciente']; ?>','<?php echo $row['nombre_paciente']; ?>')"  title="Desactivar" ><i class="fa fa-times"></i></button>
+										<?php if ($row['estadoPaciente'] == 'activo') { ?>
+										<button type="button" class="btn btn-danger" onclick="desactivar('<?php echo $row['id_Pacientes']; ?>','<?php echo $row['nombre_Pacientes']; ?>')"  title="Desactivar" ><i class="fa fa-times"></i></button>
 
-										<?php }if ($row['estado_paciente'] == 'inactivo') { ?>
+										<?php }if ($row['estadoPaciente'] == 'inactivo') { ?>
 
-										<button type="button" class="btn btn-success" onclick="activar('<?php echo $row['id_paciente'] ?>','<?php echo $row['nombre_paciente'] ?>')"  title="Activar" ><i class="fa fa-check"></i></button>
+										<button type="button" class="btn btn-success" onclick="activar('<?php echo $row['id_Pacientes'] ?>','<?php echo $row['nombre_Pacientes'] ?>')"  title="Activar" ><i class="fa fa-check"></i></button>
 
 										<?php }  ?>
 										</center>      
