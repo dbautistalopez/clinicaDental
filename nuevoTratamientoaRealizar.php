@@ -89,7 +89,7 @@ if ($_SESSION["estado"] == "inactivo") {
                                 
                                     <?php
                                             //Aqui tendriamos que recibir el Id del Paciente seleccionado para que solo se desplieguen los tratamientos pendientes de él
-                                        $sql="SELECT * FROM tbl_Presupuestos WHERE id_Pacientes = 3";
+                                        $sql="SELECT * FROM tbl_Presupuestos WHERE id_Pacientes =1";
                                         $result=mysqli_query($conexion,$sql);
 
                                         ?>
