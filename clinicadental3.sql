@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-10-2019 a las 00:57:31
+-- Tiempo de generación: 20-10-2019 a las 02:05:12
 -- Versión del servidor: 10.1.35-MariaDB
 -- Versión de PHP: 7.2.9
 
@@ -62,6 +62,27 @@ CREATE TABLE `tbl_citas` (
 
 INSERT INTO `tbl_citas` (`id_Citas`, `id_Pacientes`, `fechaProgramada`, `hora`, `descripcionCita`) VALUES
 (1, 1, '2019-10-16', '18:00:00.000000', 'Vamo a quitar muela');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tbl_cobranza`
+--
+
+CREATE TABLE `tbl_cobranza` (
+  `id_cobranza` int(11) NOT NULL,
+  `tratamiento` int(11) DEFAULT NULL,
+  `abonos` float DEFAULT NULL,
+  `fecha` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tbl_cobranza`
+--
+
+INSERT INTO `tbl_cobranza` (`id_cobranza`, `tratamiento`, `abonos`, `fecha`) VALUES
+(1, 1, NULL, '2019-10-02'),
+(5, 1, 50, '2019-10-11');
 
 -- --------------------------------------------------------
 
@@ -126,17 +147,16 @@ CREATE TABLE `tbl_presupuestos` (
   `id_Presupuesto` int(11) NOT NULL,
   `id_Piezas` int(11) NOT NULL,
   `id_Pacientes` int(11) NOT NULL,
-  `descripcion` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
-  `precio` float NOT NULL
+  `descripcion` varchar(45) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `tbl_presupuestos`
 --
 
-INSERT INTO `tbl_presupuestos` (`id_Presupuesto`, `id_Piezas`, `id_Pacientes`, `descripcion`, `precio`) VALUES
-(3, 1, 1, 'Ortodoncia', 1000),
-(4, 1, 1, 'quitar muelas', 10000);
+INSERT INTO `tbl_presupuestos` (`id_Presupuesto`, `id_Piezas`, `id_Pacientes`, `descripcion`) VALUES
+(3, 1, 1, 'Ortodoncia'),
+(4, 1, 1, 'quitar muelas');
 
 -- --------------------------------------------------------
 
@@ -191,16 +211,16 @@ CREATE TABLE `tratamientorealizar` (
   `id_Citas` int(11) NOT NULL,
   `id_Presupuesto` int(11) NOT NULL,
   `tratamientoRealizar` varchar(1000) COLLATE utf8_spanish_ci NOT NULL,
-  `Precio` float NOT NULL,
-  `Pagado` float NOT NULL
+  `precio` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `tratamientorealizar`
 --
 
-INSERT INTO `tratamientorealizar` (`id_Seguimientos`, `id_Citas`, `id_Presupuesto`, `tratamientoRealizar`, `Precio`, `Pagado`) VALUES
-(1, 1, 3, 'Aflojar muela', 1000, 0);
+INSERT INTO `tratamientorealizar` (`id_Seguimientos`, `id_Citas`, `id_Presupuesto`, `tratamientoRealizar`, `precio`) VALUES
+(1, 1, 3, 'Aflojar muela', 0),
+(2, 1, 3, 'cambio de hules de brackets', 1000);
 
 --
 -- Índices para tablas volcadas
@@ -218,6 +238,13 @@ ALTER TABLE `tbl_cclinico`
 ALTER TABLE `tbl_citas`
   ADD PRIMARY KEY (`id_Citas`),
   ADD KEY `fk_tbl_Citas_tbl_Pacientes_idx` (`id_Pacientes`);
+
+--
+-- Indices de la tabla `tbl_cobranza`
+--
+ALTER TABLE `tbl_cobranza`
+  ADD PRIMARY KEY (`id_cobranza`),
+  ADD KEY `tratamiento` (`tratamiento`) USING BTREE;
 
 --
 -- Indices de la tabla `tbl_pacientes`
@@ -276,6 +303,12 @@ ALTER TABLE `tbl_citas`
   MODIFY `id_Citas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT de la tabla `tbl_cobranza`
+--
+ALTER TABLE `tbl_cobranza`
+  MODIFY `id_cobranza` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT de la tabla `tbl_pacientes`
 --
 ALTER TABLE `tbl_pacientes`
@@ -309,7 +342,7 @@ ALTER TABLE `tbl_usuario`
 -- AUTO_INCREMENT de la tabla `tratamientorealizar`
 --
 ALTER TABLE `tratamientorealizar`
-  MODIFY `id_Seguimientos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_Seguimientos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
@@ -320,6 +353,12 @@ ALTER TABLE `tratamientorealizar`
 --
 ALTER TABLE `tbl_citas`
   ADD CONSTRAINT `fk_tbl_Citas_tbl_Pacientes` FOREIGN KEY (`id_Pacientes`) REFERENCES `tbl_pacientes` (`id_Pacientes`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `tbl_cobranza`
+--
+ALTER TABLE `tbl_cobranza`
+  ADD CONSTRAINT `tbl_cobranza_ibfk_1` FOREIGN KEY (`tratamiento`) REFERENCES `tratamientorealizar` (`id_Seguimientos`);
 
 --
 -- Filtros para la tabla `tbl_presupuestos`
