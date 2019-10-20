@@ -13,7 +13,7 @@ echo $precio  ;
 
 echo $trateco  ;
 echo $tratamiento  ;
-    $sql="Insert Into tratamientorealizar values(NULL,'1','$trateco','$tratamiento','$precio','0')";
+    $sql="Insert Into tratamientorealizar values(NULL,'1','$trateco','$tratamiento','$precio')"; //Aqui debemos mandar el id de citas en el 2do campo a insertar
 
     $result= $conexion->query($sql);
     if($result){
