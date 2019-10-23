@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-10-2019 a las 02:05:12
+-- Tiempo de generación: 23-10-2019 a las 02:29:39
 -- Versión del servidor: 10.1.35-MariaDB
 -- Versión de PHP: 7.2.9
 
@@ -45,6 +45,32 @@ INSERT INTO `tbl_cclinico` (`id_cclinico`, `nombre_cc`, `descripcion_cc`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tbl_ccxpaciente`
+--
+
+CREATE TABLE `tbl_ccxpaciente` (
+  `id_ccxpaciente` int(11) NOT NULL,
+  `id_cclinico` int(11) NOT NULL,
+  `id_Pacientes` int(11) NOT NULL,
+  `apunte` varchar(100) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tbl_ccxpaciente`
+--
+
+INSERT INTO `tbl_ccxpaciente` (`id_ccxpaciente`, `id_cclinico`, `id_Pacientes`, `apunte`) VALUES
+(1, 2, 2, ''),
+(2, 1, 2, ''),
+(3, 1, 2, ''),
+(4, 2, 3, ''),
+(5, 1, 3, ''),
+(6, 2, 4, ''),
+(7, 1, 4, '');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tbl_citas`
 --
 
@@ -81,8 +107,8 @@ CREATE TABLE `tbl_cobranza` (
 --
 
 INSERT INTO `tbl_cobranza` (`id_cobranza`, `tratamiento`, `abonos`, `fecha`) VALUES
-(1, 1, NULL, '2019-10-02'),
-(5, 1, 50, '2019-10-11');
+(1, 1, 2000, '2019-10-02'),
+(5, 2, 50, '2019-10-11');
 
 -- --------------------------------------------------------
 
@@ -116,7 +142,9 @@ CREATE TABLE `tbl_pacientes` (
 
 INSERT INTO `tbl_pacientes` (`id_Pacientes`, `nombre_Pacientes`, `direccion_Pacientes`, `telefonoCasa`, `telefonoCel`, `fechaRegistro`, `fechaNacimiento`, `estadoCivil`, `ocupacion`, `recomendadoPor`, `personaResponsable`, `numeroRecomendaciones`, `direccionResponsable`, `medicoPersonal`, `telefonoMedico`, `fotografias`, `estadoPaciente`) VALUES
 (1, 'Esteban Quito', 'Xela', '77777777', '22222222', '2019-10-01', '2019-08-06', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo'),
-(2, '', '', '', '', '0000-00-00', '0000-00-00', '', '', '', '', NULL, '', '', '', NULL, 'activo');
+(2, 'David Estuardo', 'San Marcos', '32145879', '45359588', '2019-10-09', '1995-10-27', '', '', '', '', NULL, '', '', '', NULL, 'activo'),
+(3, 'VÃ­ctor YacÃ³n', 'QuichÃ©', '1231525', '1231314', '2019-10-17', '1999-02-20', 'Soltero', 'Estudiante', 'Antonio Estacuy', 'Oscar MÃ©ndez', NULL, 'La Esperanza, Quetzaltenango', 'HÃ©ctor Cifuentes', '912992434', 'img/fotos/', 'activo'),
+(4, 'Jefry Maldonado', 'San Marcos', '45359588', '45359588', '2019-01-15', '1999-02-20', 'Soltero', 'Ingeniero', 'CÃ©sar Aguilar', 'Elmer Orozco', NULL, 'San Marcos', 'Antonio Ayala', '(502) 419-1523', 'img/fotos/', 'activo');
 
 -- --------------------------------------------------------
 
@@ -135,7 +163,8 @@ CREATE TABLE `tbl_piezas` (
 
 INSERT INTO `tbl_piezas` (`id_Piezas`, `nombrePieza`) VALUES
 (1, 'Co2'),
-(2, '1.6');
+(2, '1.6'),
+(3, 'Co3');
 
 -- --------------------------------------------------------
 
@@ -219,7 +248,7 @@ CREATE TABLE `tratamientorealizar` (
 --
 
 INSERT INTO `tratamientorealizar` (`id_Seguimientos`, `id_Citas`, `id_Presupuesto`, `tratamientoRealizar`, `precio`) VALUES
-(1, 1, 3, 'Aflojar muela', 0),
+(1, 1, 3, 'Aflojar muela', 2000),
 (2, 1, 3, 'cambio de hules de brackets', 1000);
 
 --
@@ -231,6 +260,13 @@ INSERT INTO `tratamientorealizar` (`id_Seguimientos`, `id_Citas`, `id_Presupuest
 --
 ALTER TABLE `tbl_cclinico`
   ADD PRIMARY KEY (`id_cclinico`);
+
+--
+-- Indices de la tabla `tbl_ccxpaciente`
+--
+ALTER TABLE `tbl_ccxpaciente`
+  ADD PRIMARY KEY (`id_ccxpaciente`),
+  ADD KEY `id_Pacientes` (`id_Pacientes`);
 
 --
 -- Indices de la tabla `tbl_citas`
@@ -297,6 +333,12 @@ ALTER TABLE `tbl_cclinico`
   MODIFY `id_cclinico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT de la tabla `tbl_ccxpaciente`
+--
+ALTER TABLE `tbl_ccxpaciente`
+  MODIFY `id_ccxpaciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT de la tabla `tbl_citas`
 --
 ALTER TABLE `tbl_citas`
@@ -312,13 +354,13 @@ ALTER TABLE `tbl_cobranza`
 -- AUTO_INCREMENT de la tabla `tbl_pacientes`
 --
 ALTER TABLE `tbl_pacientes`
-  MODIFY `id_Pacientes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_Pacientes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_piezas`
 --
 ALTER TABLE `tbl_piezas`
-  MODIFY `id_Piezas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_Piezas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_presupuestos`
@@ -347,6 +389,12 @@ ALTER TABLE `tratamientorealizar`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `tbl_ccxpaciente`
+--
+ALTER TABLE `tbl_ccxpaciente`
+  ADD CONSTRAINT `tbl_ccxpaciente_ibfk_1` FOREIGN KEY (`id_Pacientes`) REFERENCES `tbl_pacientes` (`id_Pacientes`);
 
 --
 -- Filtros para la tabla `tbl_citas`
