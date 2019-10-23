@@ -53,17 +53,6 @@ if ($_SESSION["estado"] == "inactivo") {
   <!-- Alertify theme default -->  
   <link rel="stylesheet" href="css/themes/default.min.css"/> 
   <script src="js/alertify.js"></script>
-  <script>
-	  jQuery(document).ready(function($){
-		$("#regNuevo").click(function(){
-			$('#users-form').css("display","none");
-			$('#titulo').css("display","none");
-			$('#users-cc').css("display","block");
-			$('#titulo1').css("display","block");
-		});
-		
-	  });
-  </script>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -111,13 +100,13 @@ if ($_SESSION["estado"] == "inactivo") {
                         <!-- Form para crear nuevo Usuario con los datos Proporcionados por el cliente -->
                         <div id="users-form"  style="padding:25px; background-color:#FFFFFF; border-radius:5px;margin-left:auto; margin-right:auto;" >
                             <form method="post" action="Controller/pacientes/procesar_paciente.php">
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-6">
                                      <label for="foto">Foto del Paciente</label>
-                                        <input type="file" src="img_submit.gif">
+                                        <input class="form-control" type="file" id="imagen" name="imagen" multiple>
                                  </div>       
                                 <div class="form-group col-md-12">
                                      <label for="usuario">Nombre del Paciente</label>
-                                        <input class="form-control" type="text" id="nombre" name="nombre" placeholder="Ingrese nombre del producto" required>
+                                        <input class="form-control" type="text" id="nombre" name="nombre" placeholder="Ingrese nombre del paciente" required>
                                 </div>
                                 <div class="form-group col-md-8">
                                      <label for="direccion">Dirección</label>
@@ -197,44 +186,6 @@ if ($_SESSION["estado"] == "inactivo") {
                                 </div>
                             </form>
 
-						</div>
-						
-						<div id="users-cc" class="vh-100 bg-light w-100">
-							<form action="Controller/control-clinico/procesar_cc.php" class="w-100">
-								<table style="width:60%;margin-left:auto;margin-right:auto;">
-									<?php
-										$i = 0;
-										$sql="SELECT *From tbl_cclinico order by id_cclinico desc";
-										$result=mysqli_query($conexion,$sql);
-										while($row=mysqli_fetch_array($result)){
-											$i++;
-									?>
-									<tr style="height:20px;">
-										<td style="width:5px">											
-											<input type="checkbox" id="checc" name="checc">
-										</td>
-										<td style="width:5px">
-											<?php echo $row['nombre_cc'] ?> </td>
-										<td style="width:5px">                                
-											<div class="form-group ml-5">
-											<label for="apuntecc"></label>
-												<input class="form-control" type="text" placeholder="Ingrese apunte" id="apuntecc" name="apuntecc">
-											</div>
-										</td>
-									</tr>
-									<?php 
-										}
-											$conexion->close();
-									?>
-
-								</table>
-								<div class="form-row">
-									<div class="form-group col-md-12">
-										<br>
-										<button type="submit" id="regNuevo" class="btn btn-primary" style="width:20%;margin-left:35%;margin-right:auto;">Guardar Cuadro Clínico</button>
-									</div>
-								</div>
-							</form>
 						</div>
                         <!--Fin Contenido-->
                   </div>

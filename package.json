@@ -1,0 +1,33 @@
+{
+  "name": "clinicadental",
+  "version": "1.0.0",
+  "description": "-User\r     equito\r     -Password\r     765",
+  "main": "gulpfile.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dbautistalopez/clinicaDental.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dbautistalopez/clinicaDental/issues"
+  },
+  "homepage": "https://github.com/dbautistalopez/clinicaDental#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-clean-css": "^4.2.0"
+  },
+  "dependencies": {
+    "browser-sync": "^2.26.7",
+    "gulp-concat": "^2.6.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-uglify": "^3.0.2",
+    "start": "^5.1.0"
+  }
+}
