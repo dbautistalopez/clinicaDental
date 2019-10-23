@@ -235,6 +235,7 @@ session_start();
                                     <th>Dirección</th>
                                     <th>Teléfono</th>
                                     <th>Fecha Examen</th>
+                                    <th>Cuadro Clínico</th>
                                     <th>Estado</th>
                                     <th>Opciones</th>
                                 </tr>
@@ -249,11 +250,17 @@ session_start();
                                 ?>
                               <tr>
                 <td><?php echo $i; ?></td>
-                <td></td>
+                <td><<?php echo $row['fotografias'] ?>/td>
                 <td class="font-weight-bold"><?php echo $row['nombre_Pacientes'] ?></td>
                 <td><?php echo $row['direccion_Pacientes'] ?></td>
                 <td><?php echo $row['telefonoCel'] ?></td>
                 <td class="text-center"><?php echo $row['fechaRegistro'] ?></td>
+                <td class="text-center">                                    
+                  <form action="detallecc.php" method="post">
+                  <input type="hidden" name="id_Pacientes" id="id_Pacientes" value="<?php echo $row['id_Pacientes']; ?>" />
+                  <button type="submit" class="btn btn-light fa fa-eye" id="btndetalle"  title="Ver detalle"></button>
+                  </form>
+                </td>
                 <td class="text-center"><?php 
                   if ($row['estadoPaciente'] == 'activo') {
                     echo "Activo";
@@ -264,7 +271,7 @@ session_start();
                   ?></td>
                 <td>
 
-                                        <center>
+                  <center>
 										<button type="button" class="btn btn-warning " onclick="actualizar('<?php echo $row['id_Pacientes'] ?>','<?php echo $row['nombre_Pacientes'] ?>','<?php echo $row['direccion_Pacientes'] ?>','<?php echo $row['telefonoCel'] ?>')"  title="Editar" ><span class="fa fa-pencil-square-o edit"></span></button>
 
 										<?php if ($row['estadoPaciente'] == 'activo') { ?>
@@ -275,7 +282,7 @@ session_start();
 										<button type="button" class="btn btn-success" onclick="activar('<?php echo $row['id_Pacientes'] ?>','<?php echo $row['nombre_Pacientes'] ?>')"  title="Activar" ><i class="fa fa-check"></i></button>
 
 										<?php }  ?>
-										</center>      
+								  </center>      
                                         
                                     </td>
                               </tr>
