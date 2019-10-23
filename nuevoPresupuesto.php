@@ -54,51 +54,6 @@ if ($_SESSION["estado"] == "inactivo") {
   <!-- Alertify theme default -->  
   <link rel="stylesheet" href="css/themes/default.min.css"/> 
   <script src="js/alertify.js"></script>
-  
-  <!-- <script>
-  $(document).ready(function(){
-    $('#enviamarca').click(function(){
-      var marca = document.getElementById('marca').value;
-      var ruta = "Nom="+marca;
-      $.ajax({
-        url: 'procces/procesar_marca.php',
-        type: 'POST',
-        data: ruta,
-      })
-      .done(function(res){
-        $('#respuesta').html(res)
-      })
-      .fail(function(){
-        console.log("error");
-      })
-      .always(function(){
-        console.log("complete");
-      });
-    });
-});
-</script>
-<script>
-$(document).ready(function(){
-  $('#enviamedida').click(function(){
-    var medida = document.getElementById('medida').value;
-    var ruta = "Nom="+medida;
-    $.ajax({
-      url: 'procces/procesar_medida.php',
-      type: 'POST',
-      data: ruta,
-    })
-    .done(function(res){
-      $('#respuesta').html(res)
-    })
-    .fail(function(){
-      console.log("error");
-    })
-    .always(function(){
-      console.log("complete");
-    });
-  });
-});
-</script> -->
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -145,8 +100,6 @@ $(document).ready(function(){
 
                         <div id="users-form"  style="padding:25px; background-color:#FFFFFF; border-radius:5px;margin-left:auto; margin-right:auto;">
                             <form method="post" action="Controller/piezas/agregar_pieza.php">
-                                
-                               
                                 <div class="form-group col-md-4">
                                   <label for="tel1">Agregar número de Pieza</label>
                                     <input class="form-control" type="text" placeholder="Escriba el Nombre de la Pieza" id="nombrepieza" name="nombrepieza">
@@ -175,9 +128,7 @@ $(document).ready(function(){
 
                         <!-- Form para crear nuevo Tratamiento con los datos Proporcionados por el cliente -->
                         <div id="users-form"  style="padding:25px; background-color:#FFFFFF; border-radius:5px;margin-left:auto; margin-right:auto;">
-                            <form method="post" action="Controller/presupuestos/agregar_presupuestos.php">
-                                
-                               
+                            <form method="post" action="Controller/presupuestos/agregar_presupuestos.php">                              
                                 <div class="form-group col-md-4">
                                  <label for="tel1">Seleccione Pieza</label>
                                      <select class="form-control" id="nopieza" name="nopieza" placeholder="Seleccione número de Pieza" required>
@@ -195,18 +146,16 @@ $(document).ready(function(){
                                 </div>  
                                 <div class="form-group col-md-4">
                                  <label for="tel1">Seleccione Paciente</label>
-                                     <select class="form-control" id="paciente" name="paciente" placeholder="Paciente arreglar" required>
-                                     
-                                    <?php
-                                    
-                                        while($mostrar1=mysqli_fetch_array($result1)){
-                                        echo "<option value= '".$mostrar1['0']."'>".$mostrar1['1']."</option>";  //De esta forma el numero 0 representa la posicion que realizo el select y muestra todos los productos
-                                        }
+                                  <?php 
+                                    $sql="SELECT *From tbl_pacientes order by id_Pacientes desc limit 1";
+                                          $result=mysqli_query($conexion,$sql);
+                                          while($row=mysqli_fetch_array($result)){
 
-                                        
                                     ?>
+                                    <input class="form-control" type="text" name="paciente" value="<?php echo $row['nombre_Pacientes'] ?>" style="font-weight:bold;" disabled>
+                                    <input type="hidden" name="id_paciente" value=" <?php echo $row['id_Pacientes'] ?>">
+                                  <?php }?>  
 
-                                   </select>
                                 </div>     
                                 <div class="form-group col-md-4">
                                   <label for="tel2">Tratamiento Recomendado</label>
