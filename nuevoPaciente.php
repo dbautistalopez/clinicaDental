@@ -99,10 +99,11 @@ if ($_SESSION["estado"] == "inactivo") {
                         <!--Contenido-->
                         <!-- Form para crear nuevo Usuario con los datos Proporcionados por el cliente -->
                         <div id="users-form"  style="padding:25px; background-color:#FFFFFF; border-radius:5px;margin-left:auto; margin-right:auto;" >
-                            <form method="post" action="Controller/pacientes/procesar_paciente.php">
+                            <form method="post" action="Controller/pacientes/procesar_paciente.php" enctype="multipart/form-data" >
                                 <div class="form-group col-md-6">
                                      <label for="foto">Foto del Paciente</label>
-                                        <input class="form-control" type="file" id="imagen" name="imagen" multiple>
+                                     <input class="form-control" type="file" id= "foto" name="foto" accept="image/*" placeholder="Foto" required="" />
+                               
                                  </div>       
                                 <div class="form-group col-md-12">
                                      <label for="usuario">Nombre del Paciente</label>

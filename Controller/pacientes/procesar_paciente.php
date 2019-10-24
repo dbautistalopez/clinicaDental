@@ -16,21 +16,46 @@ $perResp=$_POST["perResp"];
 $dirPerResp=$_POST["dirPerResp"];
 $medPer=$_POST["medPer"];
 $telMed=$_POST["telMed"];
-$nameimagen = $_FILES['imagen']['name'];
-$tmpimagen = $_FILES['imagen']['tmp_name'];
-$ruta = "img/fotos";
 
-$ruta=$ruta."/".$nameimagen;
+$imgFile = $_FILES["foto"]["name"];
+$tmp_dir = $_FILES["foto"]["tmp_name"];
+$imgSize = $_FILES["foto"]["size"];
 
-move_uploaded_file($tmpimagen,$ruta);
 
-    $sql="Insert Into tbl_pacientes values(NULL,'$nombre','$direccion','$telCasa','$telMovil','$fechaEx','$fechaNac','$estadoCivil','$ocupacion','$recomendado','$perResp',NULL,'$dirPerResp','$medPer','$telMed','$ruta','activo')";
+$upload_dir = 'fotos/'; // upload directory
+
+ $imgExt = strtolower(pathinfo($imgFile,PATHINFO_EXTENSION)); // get image extension
+
+ // valid image extensions
+ $valid_extensions = array('jpeg', 'jpg', 'png', 'gif'); // valid extensions
+
+ // rename uploading image
+ $userpic = rand(1000,1000000).".".$imgExt;
+  
+ // allow valid image file formats
+ if(in_array($imgExt, $valid_extensions)){   
+  // Check file size '1MB'
+  if($imgSize < 1000000)    {
+   move_uploaded_file($tmp_dir,$upload_dir.$userpic);
+  }
+  else{
+//header("location: registrar.php?imagen");
+exit(); 
+  }
+ }
+ else{
+  //("location: registrar.php?imagen"); 
+  exit();
+ }
+
+
+    $sql="Insert Into tbl_pacientes values(NULL,'$nombre','$direccion','$telCasa','$telMovil','$fechaEx','$fechaNac','$estadoCivil','$ocupacion','$recomendado','$perResp',NULL,'$dirPerResp','$medPer','$telMed','$userpic','activo')";
 
     $result= $conexion->query($sql);
     if($result){
-		header('Location: ../../selectCC.php?success=1');
+	//	header('Location: ../../selectCC.php?success=1');
     }else{
-		header("Location: ../../nuevoPaciente.php?error=1");
+	//	header("Location: ../../nuevoPaciente.php?error=1");
     }
 $conexion->close();
 
