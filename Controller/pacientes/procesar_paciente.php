@@ -53,9 +53,9 @@ exit();
 
     $result= $conexion->query($sql);
     if($result){
-	//	header('Location: ../../selectCC.php?success=1');
+	header('Location: ../../selectCC.php?success=1');
     }else{
-	//	header("Location: ../../nuevoPaciente.php?error=1");
+	header("Location: ../../nuevoPaciente.php?error=1");
     }
 $conexion->close();
 
