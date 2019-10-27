@@ -122,8 +122,11 @@ if ($_SESSION["estado"] == "inactivo") {
                         $sql="SELECT * FROM tbl_Piezas";
                         $result=mysqli_query($conexion,$sql);
 
+                        $paciente = $_POST["id_Pacientes"];
+
                         $sql="SELECT * FROM tbl_Pacientes";
                         $result1=mysqli_query($conexion,$sql);
+
                         ?>
 
                         <!-- Form para crear nuevo Tratamiento con los datos Proporcionados por el cliente -->
@@ -147,12 +150,12 @@ if ($_SESSION["estado"] == "inactivo") {
                                 <div class="form-group col-md-4">
                                  <label for="tel1">Seleccione Paciente</label>
                                   <?php 
-                                    $sql="SELECT *From tbl_pacientes order by id_Pacientes desc limit 1";
+                                    $sql="SELECT *From tbl_pacientes WHERE id_Pacientes = '$paciente'";
                                           $result=mysqli_query($conexion,$sql);
                                           while($row=mysqli_fetch_array($result)){
 
                                     ?>
-                                    <input class="form-control" type="text" name="paciente" value="<?php echo $row['nombre_Pacientes'] ?>" style="font-weight:bold;" disabled>
+                                    <input class="form-control" type="text" name="paciente" value="<?php echo $row['nombre_Pacientes']?>" style="font-weight:bold;" disabled>
                                     <input type="hidden" name="id_paciente" value=" <?php echo $row['id_Pacientes'] ?>">
                                   <?php }?>  
 

@@ -73,7 +73,7 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="nuevaCita.php"><i class="fa fa-circle-o"></i> Crear Cita</a></li>
-                <li><a href="citas.php"><i class="fa fa-circle-o"></i> Todas las citas</a></li>
+                <li><a href="proveedor.php"><i class="fa fa-circle-o"></i> Todas las citas</a></li>
               </ul>
             </li>
             <li class="treeview">
@@ -94,8 +94,8 @@
                  <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="nuevoPresupuesto.php"><i class="fa fa-circle-o"></i>Crear Tratamiento Recomendado</a></li>
-                <li><a href="nuevoTratamientoaRealizar.php"><i class="fa fa-circle-o"></i>Crear tratamientos</a></li>
+                <!-- <li><a href="nuevoPresupuesto.php"><i class="fa fa-circle-o"></i>Crear Tratamiento Recomendado</a></li>
+                <li><a href="nuevoTratamientoaRealizar.php"><i class="fa fa-circle-o"></i>Crear tratamientos</a></li> -->
                 <li><a href="vertratamientos.php"><i class="fa fa-circle-o"></i>Ver Tratamientos</a></li>             
               </ul>
             </li>

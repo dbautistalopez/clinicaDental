@@ -15,7 +15,7 @@ $apunte=$_POST["apuntecc"];
         $result= $conexion->query($sql);
     }
     if($result){
-		header('Location: ../../opcionPaciente.php');
+		header('Location: ../../listaPaciente.php');
     }else{
 		header("Location: ../../selectCC.php?error=1");
     }

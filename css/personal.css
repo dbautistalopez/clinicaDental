@@ -1,0 +1,7 @@
+#panel, #flip {
+    text-align: center;
+  }
+  
+  #panel {
+    display: none;
+  }

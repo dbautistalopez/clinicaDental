@@ -28,6 +28,7 @@ session_start();
   <link rel="stylesheet" href="css/font-awesome.css">
   <link rel="stylesheet" href="css/AdminLTE.min.css">
   <link rel="stylesheet" href="css/_all-skins.min.css">
+  <link rel="stylesheet" href="css/personal.css">
   <link rel="stylesheet" href="css/jquery.dataTables.min.css">
   <link rel="stylesheet" href="DataTables/DataTables-1.10.18/dataTables.bootstrap.min.js">
   <script src="js/jquery.dataTables.min.js"></script>
@@ -40,6 +41,13 @@ session_start();
   <link rel="stylesheet" href="css/themes/default.min.css"/> 
   <script src="js/alertify.js"></script>
 <script type="text/javascript" src="DataTables/datatables.min.js"></script>
+<script> 
+$(document).ready(function(){
+  $("#flip").click(function(){
+    $("#panel").slideDown("slow");
+  });
+});
+</script>
 <!--Script para cargar datos en modal-->
 <script type="text/javascript">
   function actualizar(id_Paciente,nombre_Pacientes,direccion_Pacientes,telefonoCel){
@@ -235,7 +243,9 @@ session_start();
                                     <th>Dirección</th>
                                     <th>Teléfono</th>
                                     <th>Fecha Examen</th>
-                                    <th>Cuadro Clínico</th>
+                                    <th>Historial Clínico</th>
+                                    <th>CC</th>
+                                    <th>Tratamiento</th>
                                     <th>Estado</th>
                                     <th>Opciones</th>
                                 </tr>
@@ -250,15 +260,31 @@ session_start();
                                 ?>
                               <tr>
                 <td><?php echo $i; ?></td>
-                <td><<?php echo $row['fotografias'] ?>/td>
+                <td> <img src="Controller/pacientes/fotos/<?php echo $row['fotografias']; ?>" class="img-rounded" width="64px" height="64px" /> </td>
                 <td class="font-weight-bold"><?php echo $row['nombre_Pacientes'] ?></td>
                 <td><?php echo $row['direccion_Pacientes'] ?></td>
                 <td><?php echo $row['telefonoCel'] ?></td>
                 <td class="text-center"><?php echo $row['fechaRegistro'] ?></td>
+                <td class="text-center">
+                  <form action="vertratamientos.php" method="post">
+                    <input type="hidden" name="id_Pacientes" id="id_Pacientes" value="<?php echo $row['id_Pacientes']; ?>" />
+                    <button type="submit" class="btn btn-light fa fa-eye"  title="Ver tratamientos"></button>
+                  </form>
+                </td>
                 <td class="text-center">                                    
                   <form action="detallecc.php" method="post">
                   <input type="hidden" name="id_Pacientes" id="id_Pacientes" value="<?php echo $row['id_Pacientes']; ?>" />
-                  <button type="submit" class="btn btn-light fa fa-eye" id="btndetalle"  title="Ver detalle"></button>
+                  <button type="submit" class="btn fa fa-cc" id="btndetalle"  title="Ver detalle" style="background: #fdd835"></button>
+                  </form>
+                </td>
+                <td>
+                  <form action="nuevoPresupuesto.php" method="post" style="display:inline">
+                    <input type="hidden" name="id_Pacientes" id="id_Pacientes" value="<?php echo $row['id_Pacientes']; ?>" />
+                    <button type="submit" class="btn btn-success" id="btndetalle"  title="Tratamiento Recomendado" style="font-weight:bold;">TR</button>
+                  </form>
+                  <form action="nuevoTratamientoaRealizar.php" method="post" style="display:inline">
+                    <input type="hidden" name="id_Pacientes" id="id_Pacientes" value="<?php echo $row['id_Pacientes']; ?>" />
+                    <button type="submit" class="btn btn-primary" id="btndetalle"  title="Nuevo Tratamiento" style="font-weight:bold;">NT</button>
                   </form>
                 </td>
                 <td class="text-center"><?php 
@@ -268,7 +294,8 @@ session_start();
                   if ($row['estadoPaciente'] == 'inactivo') {
                     echo "Inactivo";
                   }
-                  ?></td>
+                  ?>
+                </td>
                 <td>
 
                   <center>

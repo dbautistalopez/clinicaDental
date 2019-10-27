@@ -84,22 +84,31 @@ if ($_SESSION["estado"] == "inactivo") {
                     <div id="respuesta"></div>
                         <!--Contenido-->
                         <!-- Form para crear nuevo Tratamiento con los datos Proporcionados por el cliente -->
-                        <div id="users-form"  style="padding:25px; background-color:#FFFFFF; border-radius:5px;margin-left:auto; margin-right:auto;">
+                        <div id="users-form"  style="padding:0px 25px 25px 25px; background-color:#FFFFFF; border-radius:5px;margin-left:auto; margin-right:auto;">
                             <form method="post" action="Controller/tratamientos/agregar_tratamientos.php">
+
                                 
                                     <?php
-                                            //Aqui tendriamos que recibir el Id del Paciente seleccionado para que solo se desplieguen los tratamientos pendientes de él
-                                        $sql="SELECT * FROM tbl_Presupuestos WHERE id_Pacientes =1";
-                                        $result=mysqli_query($conexion,$sql);
+                                      $paciente = $_POST["id_Pacientes"];
+                                      //Aqui tendriamos que recibir el Id del Paciente seleccionado para que solo se desplieguen los tratamientos pendientes de él
+                                      $sql="SELECT * FROM tbl_pacientes WHERE id_Pacientes = $paciente";
+                                      $result=mysqli_query($conexion,$sql);
+                                      while($row=mysqli_fetch_array($result)){
+                                      
+                                        echo "<h2 style='font-weight:bold;color:#33b5e5'>".$row['nombre_Pacientes']."</h2>";
+                                      
+                                      }
 
                                         ?>
-                               
+                               <br>
                                 <div class="form-group col-md-4">
                                  <label for="tel1">Selecciona Tratamiento Recomendado</label>
                                      <select class="form-control" id="tratreco" name="tratreco" placeholder="Selecciona tratamiento recomendado" required>
                                      
                                     <?php
                                     //davidsin lo mirara 
+                                      $sql="SELECT * FROM tbl_presupuestos WHERE id_Pacientes = $paciente";
+                                      $result=mysqli_query($conexion,$sql);
                                         while($mostrar=mysqli_fetch_array($result)){
                                         echo "<option value= '".$mostrar['0']."'>".$mostrar['3']."</option>";  //De esta forma el numero 0 representa la posicion que realizo el select y muestra todos los productos
                                         }
