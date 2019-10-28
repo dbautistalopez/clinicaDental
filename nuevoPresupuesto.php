@@ -122,6 +122,7 @@ if ($_SESSION["estado"] == "inactivo") {
                         $sql="SELECT * FROM tbl_Piezas";
                         $result=mysqli_query($conexion,$sql);
 
+                       
                         $paciente = $_POST["id_Pacientes"];
 
                         $sql="SELECT * FROM tbl_Pacientes";
@@ -155,7 +156,7 @@ if ($_SESSION["estado"] == "inactivo") {
                                           while($row=mysqli_fetch_array($result)){
 
                                     ?>
-                                    <input class="form-control" type="text" name="paciente" value="<?php echo $row['nombre_Pacientes']?>" style="font-weight:bold;" disabled>
+                                    <input class="form-control" type="text" name="id_paciente" value="<?php echo $row['nombre_Pacientes']?>" style="font-weight:bold;" disabled>
                                     <input type="hidden" name="id_paciente" value=" <?php echo $row['id_Pacientes'] ?>">
                                   <?php }?>  
 

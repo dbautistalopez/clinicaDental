@@ -106,7 +106,7 @@ session_start();
                   </div> -->
 
                   <?php
-                      // $paciente = $_POST["id_Pacientes"];
+                  
                       // //Aqui tendriamos que recibir el Id del Paciente seleccionado para que solo se desplieguen los tratamientos pendientes de él
                       // $sql="SELECT * FROM tbl_pacientes WHERE id_Pacientes = $paciente";
                       // $result=mysqli_query($conexion,$sql);
@@ -129,16 +129,33 @@ session_start();
                                   <th>T. Recomendado</th>
                                   <th>T. a Realizar</th>
                                   <th>Cargos</th>
-                                  <th>Abono</th>
-                                  <th>Saldo</th>
+                                  
                               </tr>
                           </thead>
                           <tbody>
                           <?php
                           $i = 0;
                           // $sql="SELECT tbl_pacientes.id_Pacientes, tbl_pacientes.nombre_Pacientes, tbl_citas.fechaProgramada, tbl_citas.id_Pacientes, tbl_piezas.nombrePieza, tbl_presupuestos.descripcion, tbl_presupuestos.id_Pacientes, tratamientoRealizar.tratamientoRealizar, tratamientoRealizar.precio, tbl_cobranza.abonos,tbl_piezas.id_Piezas,tbl_presupuestos.id_Piezas, tbl_cobranza.tratamiento, tratamientorealizar.id_Seguimientos, tratamientorealizar.id_Presupuesto, tbl_presupuestos.id_Presupuesto FROM tbl_citas, tbl_piezas, tbl_presupuestos, tratamientorealizar, tbl_cobranza, tbl_pacientes WHERE  tbl_pacientes.id_Pacientes=tbl_citas.id_Pacientes AND tbl_pacientes.id_Pacientes=tbl_presupuestos.id_Pacientes AND tbl_citas.id_Pacientes = tbl_presupuestos.id_Pacientes AND tbl_piezas.id_Piezas = tbl_presupuestos.id_Piezas AND tbl_cobranza.tratamiento = tratamientorealizar.id_Seguimientos AND tratamientorealizar.id_Presupuesto = tbl_presupuestos.id_Presupuesto AND tbl_presupuestos.id_Pacientes = '$paciente' order by tbl_citas.fechaProgramada desc";
-                          $sql="SELECT tbl_pacientes.id_Pacientes, tbl_pacientes.nombre_Pacientes, tbl_citas.fechaProgramada, tbl_citas.id_Pacientes, tbl_piezas.nombrePieza, tbl_presupuestos.descripcion, tbl_presupuestos.id_Pacientes, tratamientoRealizar.tratamientoRealizar, tratamientoRealizar.precio, tbl_cobranza.abonos,tbl_piezas.id_Piezas,tbl_presupuestos.id_Piezas, tbl_cobranza.tratamiento, tratamientorealizar.id_Seguimientos, tratamientorealizar.id_Presupuesto, tbl_presupuestos.id_Presupuesto FROM tbl_citas, tbl_piezas, tbl_presupuestos, tratamientorealizar, tbl_cobranza, tbl_pacientes WHERE  tbl_pacientes.id_Pacientes=tbl_citas.id_Pacientes AND tbl_pacientes.id_Pacientes=tbl_presupuestos.id_Pacientes AND tbl_citas.id_Pacientes = tbl_presupuestos.id_Pacientes AND tbl_piezas.id_Piezas = tbl_presupuestos.id_Piezas AND tbl_cobranza.tratamiento = tratamientorealizar.id_Seguimientos AND tratamientorealizar.id_Presupuesto = tbl_presupuestos.id_Presupuesto order by tbl_citas.fechaProgramada desc";
+                         // $sql="SELECT tbl_pacientes.id_Pacientes, tbl_pacientes.nombre_Pacientes, tbl_citas.fechaProgramada, tbl_citas.id_Pacientes, tbl_piezas.nombrePieza, tbl_presupuestos.descripcion, tbl_presupuestos.id_Pacientes, tratamientoRealizar.tratamientoRealizar, tratamientoRealizar.precio, tbl_cobranza.abonos,tbl_piezas.id_Piezas,tbl_presupuestos.id_Piezas, tbl_cobranza.tratamiento, tratamientorealizar.id_Seguimientos, tratamientorealizar.id_Presupuesto, tbl_presupuestos.id_Presupuesto FROM tbl_citas, tbl_piezas, tbl_presupuestos, tratamientorealizar, tbl_cobranza, tbl_pacientes WHERE  tbl_pacientes.id_Pacientes=tbl_citas.id_Pacientes AND tbl_pacientes.id_Pacientes=tbl_presupuestos.id_Pacientes AND tbl_citas.id_Pacientes = tbl_presupuestos.id_Pacientes AND tbl_piezas.id_Piezas = tbl_presupuestos.id_Piezas AND tbl_cobranza.tratamiento = tratamientorealizar.id_Seguimientos AND tratamientorealizar.id_Presupuesto = tbl_presupuestos.id_Presupuesto order by tbl_citas.fechaProgramada desc";
                           // $sql="SELECT *From tbl_pacientes order by id_Pacientes desc";
+                          $paciente = $_POST["id_Pacientes"];
+                         
+                          $sumacargos = 0;
+
+
+                          $sql1 = "SELECT tratamientorealizar.precio from tratamientorealizar INNER JOIN tbl_presupuestos ON tbl_presupuestos.id_Presupuesto = tratamientorealizar.id_Presupuesto WHERE tbl_presupuestos.id_Pacientes = '$paciente'";
+                          $result1=mysqli_query($conexion,$sql1);
+                          while($row=mysqli_fetch_array($result1)){
+
+                          
+                          $suma1= $row['precio'];
+                          $sumacargos = $sumacargos + $suma1;
+                          }
+
+                        
+
+
+                         $sql = "SELECT tbl_citas.fechaProgramada, tbl_pacientes.nombre_Pacientes, tbl_piezas.nombrePieza, tbl_presupuestos.descripcion, tratamientoRealizar.tratamientoRealizar, tratamientorealizar.precio FROM tratamientoRealizar INNER JOIN tbl_presupuestos ON tbl_presupuestos.id_Presupuesto = tratamientoRealizar.id_Presupuesto INNER join tbl_citas ON tbl_citas.id_Citas = tratamientoRealizar.id_Citas INNER JOIN tbl_pacientes on tbl_pacientes.id_Pacientes = tbl_presupuestos.id_Pacientes INNER JOIN tbl_piezas ON tbl_piezas.id_Piezas = tbl_presupuestos.id_Piezas WHERE tbl_pacientes.id_Pacientes = '$paciente'";
                           $result=mysqli_query($conexion,$sql);
                           while($row=mysqli_fetch_array($result)){
                                         ?>
@@ -149,30 +166,145 @@ session_start();
                         <td><?php echo $row['descripcion'] ?></td>
                         <td><?php echo $row['tratamientoRealizar'] ?></td>
                         <td><?php echo $row['precio'] ?></td>
-                        <td><?php echo $row['abonos'] ?></td>
+                        
                         <td class="text-center"><?php 
-                          $saldo =  $row['precio'] - $row['abonos'];
-  
-                        if ($saldo < $row['precio']) {
+
+                     
+                          
                         ?>
-                          <span style="font-weight:bold;color:blue;"><?php echo $saldo ?> </span>
-                        <?php
-                        }
-                        if ($saldo == $row['precio']) {
-                        ?>
-                          <span style="font-weight:bold;color:blue;"><?php echo $saldo ?> </span>
-                        <?php
-                        }
-                        ?></td>
+                      
+                       
+                   
+                        
+                        </td>
                                     </tr>
                         <?php 
                           }
-                                            $conexion->close();
+                                         //   $conexion->close();
                                         ?>
   
                       </tbody>
                       </table>
                   </div>
+
+                 
+                    <div class="box-header with-border">
+                      <label style="font-size:30px;">Total:         <?php   echo $sumacargos; ?>  </label>
+                    </div>
+
+
+                  <div id="tbl-tratamiento">            
+                    <table class="table-bordered table-hover table-striped" id="mytable">
+  
+                          <thead style="background: #263238; color:#FFFFFF;">
+                              <tr>
+                                  
+                                  <th>Paciente</th>
+                                  
+                                  <th>T. Recomendado</th>
+                                  <th>T. a Realizar</th>
+                                  <th>Abonos</th>
+                                  <th>Fecha del Abono</th>
+                                  
+                              </tr>
+                          </thead>
+                          <tbody>
+                          <?php
+                          $i = 0;
+                         
+                         
+                          $sumaabonos = 0;
+
+                          $sql2 = "SELECT tbl_pacientes.nombre_Pacientes, tratamientorealizar.tratamientoRealizar, tbl_presupuestos.descripcion, tbl_cobranza.abonos, tbl_cobranza.fecha from tbl_cobranza INNER JOIN tratamientorealizar on tratamientorealizar.id_Seguimientos = tbl_cobranza.tratamiento INNER JOIN tbl_presupuestos ON tbl_presupuestos.id_Presupuesto = tratamientorealizar.id_Presupuesto INNER JOIN tbl_pacientes ON tbl_pacientes.id_Pacientes = tbl_presupuestos.id_Pacientes WHERE tbl_cobranza.idpaciente = '$paciente' ";
+                          $result2=mysqli_query($conexion,$sql2);
+                          while($row=mysqli_fetch_array($result2)){
+
+                            $suma= $row['abonos'];
+                            $sumaabonos = $sumaabonos + $suma;
+                                        ?>
+                                    <tr>
+
+                                    <td><?php echo $row['nombre_Pacientes'] ?></td>
+                                   
+                                    <td><?php echo $row['descripcion'] ?></td>
+                                    <td><?php echo $row['tratamientoRealizar'] ?></td>
+                                    <td><?php echo $row['abonos'] ?></td>
+                                    <td><?php echo $row['fecha'] ?></td>
+                        
+                       
+                      
+                        
+                        <td class="text-center"><?php 
+
+                     
+                          
+                        ?>
+                      
+                       
+                   
+                        
+                        </td>
+                                    </tr>
+                        <?php 
+                          }
+                          
+                                            $conexion->close();
+
+                                            $saldo = $sumacargos - $sumaabonos;
+                                        ?>
+                                          
+                  
+  
+                      </tbody>
+                      </table>
+
+                   
+                  </div>
+
+
+                  <form action="nuevoabono.php" method="post">
+                    <input type="hidden" name="id_Pacientes" id="id_Pacientes" value="<?php echo $paciente ?>" />
+                    <button type="submit" class="btn btn-secondary"  title="Nuevo Abono">Agregar Abono</button>
+                  </form>
+
+                  <div class="box-header with-border">
+                      <label style="font-size:30px;">Total Abonos:         <?php   echo $sumaabonos; ?>  </label>
+                    </div>
+
+                  <div id="tbl-tratamiento">            
+                    <table class="table-bordered table-hover table-striped" id="mytable">
+  
+                          <thead style="background: #263238; color:#FFFFFF;">
+                              <tr>
+                                  
+                                  <th>Total Cargos</th>
+                                  
+                                  <th>Total Abonos</th>
+                                  <th>Saldo</th>
+                                 
+                                  
+                              </tr>
+                          </thead>
+                          <tbody>
+                        
+                                    <tr>
+                                    <td><?php  echo $sumacargos ?></td>
+                                    <td><?php  echo $sumaabonos ?></td>
+                                    <td><?php echo $saldo?></td>
+
+                            <td class="text-center">
+      
+                            </td>
+                                    </tr>
+                
+                          </tbody>
+                          </table>
+                  </div>
+
+                 
+                    <div class="box-header with-border">
+                      <label style="font-size:30px;">Saldo         <?php   echo $saldo; ?>  </label>
+                    </div>
                   <!--Fin Contenido-->
                   </div>
                 </div>
