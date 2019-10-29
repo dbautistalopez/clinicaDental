@@ -58,6 +58,16 @@ session_start();
             "url": "DataTables/DataTables-1.10.18/js/Spanish.json"
         }
     } );
+    $("#tabla2").dataTable( {
+        "language": {
+            "url": "DataTables/DataTables-1.10.18/js/Spanish.json"
+        }
+    } );
+    $("#tabla3").dataTable( {
+        "language": {
+            "url": "DataTables/DataTables-1.10.18/js/Spanish.json"
+        }
+    } );
   } );
 </script>
 </head>
@@ -166,35 +176,25 @@ session_start();
                         <td><?php echo $row['descripcion'] ?></td>
                         <td><?php echo $row['tratamientoRealizar'] ?></td>
                         <td><?php echo $row['precio'] ?></td>
-                        
-                        <td class="text-center"><?php 
-
-                     
-                          
-                        ?>
-                      
-                       
-                   
-                        
-                        </td>
                                     </tr>
                         <?php 
                           }
                                          //   $conexion->close();
                                         ?>
+
+                        <tr>
+                          <td colspan="4"></td>
+                          <td><label style="font-size:30px;">Total:</label></td>
+                          <td><label style="font-size:30px;"><?php   echo $sumacargos; ?>  </label></td>
+                        </tr>
   
                       </tbody>
                       </table>
                   </div>
 
-                 
-                    <div class="box-header with-border">
-                      <label style="font-size:30px;">Total:         <?php   echo $sumacargos; ?>  </label>
-                    </div>
 
-
-                  <div id="tbl-tratamiento">            
-                    <table class="table-bordered table-hover table-striped" id="mytable">
+                  <div id="tbl-tratamientos" style="margin-top:50px;margin-bottom:25px;">            
+                    <table class="table-bordered table-hover table-striped" id="tabla2" style="width:100%">
   
                           <thead style="background: #263238; color:#FFFFFF;">
                               <tr>
@@ -230,20 +230,10 @@ session_start();
                                     <td><?php echo $row['tratamientoRealizar'] ?></td>
                                     <td><?php echo $row['abonos'] ?></td>
                                     <td><?php echo $row['fecha'] ?></td>
-                        
+                                  
                        
                       
                         
-                        <td class="text-center"><?php 
-
-                     
-                          
-                        ?>
-                      
-                       
-                   
-                        
-                        </td>
                                     </tr>
                         <?php 
                           }
@@ -253,7 +243,12 @@ session_start();
                                             $saldo = $sumacargos - $sumaabonos;
                                         ?>
                                           
-                  
+                                    <tr>
+                                      <td colspan="2"></td>
+                                      <td><label style="font-size:30px;">Total:</label></td>
+                                      <td><label style="font-size:30px;"><?php   echo $sumaabonos; ?>  </label></td>
+                                      <td></td>
+                                    </tr>
   
                       </tbody>
                       </table>
@@ -262,23 +257,18 @@ session_start();
                   </div>
 
 
-                  <form action="nuevoabono.php" method="post">
+                  <form action="nuevoabono.php" method="post" class="text-center">
                     <input type="hidden" name="id_Pacientes" id="id_Pacientes" value="<?php echo $paciente ?>" />
-                    <button type="submit" class="btn btn-secondary"  title="Nuevo Abono">Agregar Abono</button>
+                    <button type="submit" class="btn btn-primary"  title="Nuevo Abono">Agregar Abono</button>
                   </form>
 
-                  <div class="box-header with-border">
-                      <label style="font-size:30px;">Total Abonos:         <?php   echo $sumaabonos; ?>  </label>
-                    </div>
-
-                  <div id="tbl-tratamiento">            
-                    <table class="table-bordered table-hover table-striped" id="mytable">
+                  <div id="tbl-tratamiento" style="margin-top:50px;" class="text-center">            
+                    <table class="table-bordered table-hover table-striped" id="tabla3">
   
                           <thead style="background: #263238; color:#FFFFFF;">
                               <tr>
                                   
                                   <th>Total Cargos</th>
-                                  
                                   <th>Total Abonos</th>
                                   <th>Saldo</th>
                                  
@@ -290,11 +280,15 @@ session_start();
                                     <tr>
                                     <td><?php  echo $sumacargos ?></td>
                                     <td><?php  echo $sumaabonos ?></td>
-                                    <td><?php echo $saldo?></td>
-
-                            <td class="text-center">
-      
-                            </td>
+                                    <td><?php 
+                                    // if($saldo < $sumacargos){
+                                    //   echo "<span style='color:red'>".$saldo."</span>";
+                                    // }
+                                    // if($saldo == 0){
+                                    //   echo "<span style='color:green'>".$saldo."</span>";
+                                    // }
+                                    echo $saldo
+                                    ?></td>
                                     </tr>
                 
                           </tbody>

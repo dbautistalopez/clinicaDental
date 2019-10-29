@@ -23,12 +23,12 @@ echo $cantidad;
     $result= $conexion->query($sql);
     if($result){
        // echo "Producto creado satisfactoriamente <br>";
-		header('Location: ../../vertratamientos.php');
+		header('Location: ../../listaPaciente.php');
        // echo "<a href=\"../productos.php\">Regresar</a>";
     }else{
 
         //Tenemos que enviar a una pagina donde salga error, porque como manejamos con Post el Id entre archivos
-		header("Location: ../../vertratamientos.php?error=1");
+		header("Location: ../../listaPaciente.php?error=1");
     }
 $conexion->close();
 
