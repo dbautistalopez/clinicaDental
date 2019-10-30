@@ -1,5 +1,4 @@
 
-<!-- Verificacion de Sesion -->
 <?php
  session_start();
 if ($_SESSION["estado"] == "inactivo") {

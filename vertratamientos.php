@@ -1,5 +1,4 @@
 <?php
-//Verificaci[on de Sesion
 session_start();
 
   if ($_SESSION["rol"] != 1) {

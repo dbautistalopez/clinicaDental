@@ -1,19 +1,4 @@
-<?php
-// session_start();
-//   if ($_SESSION["rol"] != 1) {
-//     header("Location: ./");
-//   }
 
-//   require_once("lib/db.php");
-//   require_once("prod.php");
-//   $db =  new DbConnection;
-//   $conexion=$db->conectar();
-//   if(!isset($_SESSION["usuario"])){
-//         header("Location: login.php");
-//         exit();
-//     }
-?>
-<!-- Verificacion de Sesion -->
 <?php
  session_start();
 if ($_SESSION["estado"] == "inactivo") {
