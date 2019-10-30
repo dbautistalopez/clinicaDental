@@ -72,11 +72,10 @@
                  <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="nuevaCita.php"><i class="fa fa-circle-o"></i> Crear Cita</a></li>
-                <li><a href="proveedor.php"><i class="fa fa-circle-o"></i> Todas las citas</a></li>
+                <li><a href="citas.php"><i class="fa fa-circle-o"></i> Todas las citas</a></li>
               </ul>
             </li>
-            <li class="treeview">
+            <!-- <li class="treeview">
               <a href="#">
 			  	<i class="fa fa-file-text" aria-hidden="true"></i>
                 <span>Reportes</span>
@@ -86,7 +85,7 @@
                 <li><a href="caja.php"><i class="fa fa-circle-o"></i>Crear reporte</a></li>
                 <li><a href="venta.php"><i class="fa fa-circle-o"></i>Reportes de cuentas</a></li>
               </ul>
-            </li>
+            </li> -->
             <li class="treeview">
               <a href="#">
 			  	<i class="fa fa-medkit" aria-hidden="true"></i>
